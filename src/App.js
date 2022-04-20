@@ -3,6 +3,7 @@ import "./App.css";
 import LikeCounter from "./LikeCounter";
 import Title from "./Title";
 import AwesomeAnimals from "./AwesomeAnimals";
+import ArticleList from "./ArticleList";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Title content="Welcome to the like counter!" />
       <LikeCounter />
       <AwesomeAnimals />
+      <ArticleList />
     </div>
   );
 }
