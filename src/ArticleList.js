@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import ArticleCard from "./ArticleCard";
 
 // Complete the component ArticleList, so that it renders a list of ArticleCards based on the data in its state:
@@ -6,28 +7,27 @@ import ArticleCard from "./ArticleCard";
 // When you click it, the articles should disappear
 
 export default function ArticleList() {
-  const [articles, set_articles] = useState([
-    {
-      id: 1,
-      title: "What is React all about?",
-      body: "React is all about one-way data flow, the Virtual DOM, and transpiling JSX.",
-    },
-    {
-      id: 2,
-      title: "A lovely kid",
-      body: "In fact, a kid is also the name of a baby goat!",
-    },
-    {
-      id: 3,
-      title: "On placeholder image URLs",
-      body: "So yeah, you won't be able to look these images up. They're placeholders",
-    },
-  ]);
+  const [articles, set_articles] = useState([]);
 
   const resetArticleList = () => {
     set_articles([]);
   };
 
+  useEffect(() => {
+    async function doSomeDataFetching() {
+      console.log("Let's fetch some data!");
+      const response = await axios.get(
+        "https://jsonplaceholder.typicode.com/posts?_limit=5"
+      );
+      console.log("Got back!", response);
+      set_articles(response.data);
+    }
+    doSomeDataFetching();
+  }, []);
+
+  //As a final step, use the set_articles function in the last line of the async doSomeDataFetching function in
+  //your effect, in order to update the component's state. The article list should now automatically be populated,
+  //because React re-renders on state updates.
   return (
     <div>
       <p>Here's a lovely list of articles, for your reading pleasure:</p>
