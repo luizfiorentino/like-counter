@@ -2,6 +2,8 @@ import { useState } from "react";
 import ArticleCard from "./ArticleCard";
 
 // Complete the component ArticleList, so that it renders a list of ArticleCards based on the data in its state:
+// Add a button to the top of the article list that shows the text "Clear notifications".
+// When you click it, the articles should disappear
 
 export default function ArticleList() {
   const [articles, set_articles] = useState([
@@ -22,6 +24,10 @@ export default function ArticleList() {
     },
   ]);
 
+  const resetArticleList = () => {
+    set_articles([]);
+  };
+
   return (
     <div>
       <p>Here's a lovely list of articles, for your reading pleasure:</p>
@@ -35,6 +41,7 @@ export default function ArticleList() {
           />
         );
       })}
+      <button onClick={resetArticleList}>Clear notifications</button>
     </div>
   );
 }
